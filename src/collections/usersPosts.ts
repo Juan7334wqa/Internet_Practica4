@@ -4,14 +4,15 @@ import bcrypt from "bcryptjs";
 
 
 
-const COLLECTION = "usersVideoGames";
+const COLLECTION = "usersPosts";
 
 
-export const createUser = async (email: string, password: string) => {
+export const createUser = async (nombre: string, email: string, password: string) => {
     const db = getDB();
     const toEncriptao = await bcrypt.hash(password, 10);
 
     const result = await db.collection(COLLECTION).insertOne({
+        nombre,
         email,
         password: toEncriptao
     });

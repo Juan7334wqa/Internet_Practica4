@@ -1,29 +1,31 @@
 import { gql } from "apollo-server";
 
-
-
 export const typeDefs = gql`
   type User {
     _id: ID!
+    nombre: String!
     email: String!
   }
 
-  type VideoGame {
-    _id: ID
-    name: String
-    date: String
-    platform: String
+  type Post {
+    _id: ID!
+    titulo: String!
+    contenido: String!
+    autor: User!
+    fecha_de_creacion: String!
   }
 
   type Query {
     me: User
-    videoGames: [VideoGame]!
-    videoGame(id: ID!): VideoGame
+    posts: [Post]!
+    post(id: ID!): Post
   }
 
   type Mutation {
-    addVideoGame(name: String!, platform: String!, date: String!): VideoGame!
-    register(email: String!, password: String!): String!
+    register(nombre: String!, email: String!, password: String!): String!
     login(email: String!, password: String!): String!
+    addPost(titulo: String!, contenido: String!): Post!
+    updatePost(id: ID!, titulo: String, contenido: String): Post!
+    deletePost(id: ID!): Boolean!
   }
 `;
